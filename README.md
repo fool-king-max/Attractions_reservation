@@ -1,2 +1,2 @@
 # -
-数据库系统设计：使用django和sqlite实现
+数据库系统设计：使用django框架和sqlite数据库实现旅游景点预约
