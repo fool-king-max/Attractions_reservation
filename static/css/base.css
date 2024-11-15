@@ -1,0 +1,43 @@
+header nav {
+    display: flex;
+    justify-content: space-between; /* 左右对齐 */
+    align-items: center;
+}
+
+.nav-left a, .nav-right a {
+    margin-right: 15px; /* 设置左右边距 */
+    color: #007BFF;
+    text-decoration: underline;
+    text-decoration-color: #007BFF;
+    text-underline-position: below;
+}
+
+.nav-right a {
+    margin-left: auto; /* 将右侧的链接推到最右边 */
+}
+
+.reservation-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.reservation-section {
+    margin-top: 20px;
+}
+
+.reservation-section h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.reservation-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.reservation-section li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}

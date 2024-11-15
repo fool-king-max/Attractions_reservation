@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="reservation-container">
+    <h2>预约景点：{{ attraction.name }}</h2>
+
+    <form method="POST" id="reservation-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="date">预定日期：</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="time">预定时间：</label>
+            <input type="time" id="time" name="time" required>
+        </div>
+
+        <div class="form-group">
+            <label for="num_people">预定人数：</label>
+            <input type="number" id="num_people" name="num_people" min="1" value="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contact_name">联系人姓名：</label>
+            <input type="text" id="contact_name" name="contact_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contact_phone">联系人电话：</label>
+            <input type="text" id="contact_phone" name="contact_phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="note">备注：</label>
+            <textarea id="note" name="note"></textarea>
+        </div>
+
+        <button type="submit">提交预约</button>
+    </form>
+    <script src="{% static 'js/reserve.js' %}"></script>
+</div>
+{% endblock %}

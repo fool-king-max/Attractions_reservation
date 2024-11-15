@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>景区管理员登录</h2>
+  <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+          <label for="id_username">用户名：</label>  <!-- 中文标签 -->
+          {{ form.username }}  <!-- 显示表单字段 -->
+      </div>
+      <div class="form-group">
+          <label for="id_password">密码：</label>  <!-- 中文标签 -->
+          {{ form.password }}  <!-- 显示表单字段 -->
+      </div>
+      <button type="submit">登录</button>
+  </form>
+    <!-- 用户登录链接 -->
+    <div class="user-login-link">
+        <p>用户登录？<a href="{% url 'signin' %}">点击这里</a></p>
+        <p>总管理员登录<a href="/admin/">点击这里</a></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block headjc %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/manager_dashboard.js' %}"></script>
+{% endblock %}
+{% block title %}景区管理{% endblock %}
+{% block content %}
+<h2>管理景区预约</h2>
+
+<!-- 未来一个月预约统计 -->
+<p><strong>未来一个月的预约数量：</strong> {{ next_month_count }}人</p>
+
+<canvas id="reservationChart" width="400" height="200"></canvas>
+
+{{ daily_reservations|json_script:"daily_reservations_data" }}
+{#<script id="daily_reservations_data" type="application/json">#}
+{#    {"2024-11-16": 2, "2024-11-17": 5}#}
+{#</script>#}
+
+
+<!-- 待处理预约 -->
+<h3>待处理预约</h3>
+<form method="post" action="{% url 'batch_update_reservations' %}">
+    {% csrf_token %}
+    {% for reservation in upcoming_reservations %}
+        <div class="reservation-card">
+            <input type="checkbox" name="reservation_ids" value="{{ reservation.reservation_id }}">
+            <p><strong>景区:</strong> {{ reservation.reservation_name }}</p>
+            <p><strong>名字:</strong> {{ reservation.contact_name }}</p>
+            <p><strong>预约手机号:</strong> {{ reservation.contact_phone }}</p>
+            <p><strong>备注:</strong> {{ reservation.note }}</p>
+            <p><strong>支付时间:</strong> {{ reservation.created_at }}</p>
+        </div>
+    {% endfor %}
+    <button type="submit" name="action" value="approve" class="btn btn-approve">批量同意</button>
+    <button type="submit" name="action" value="reject" class="btn btn-reject">批量拒绝</button>
+</form>
+
+<!-- 已同意预约 -->
+<h3>已同意预约</h3>
+{% for reservation in approved_reservations %}
+    <div class="reservation-card">
+        <p><strong>景区:</strong> {{ reservation.reservation_name }}</p>
+        <p><strong>名字:</strong> {{ reservation.contact_name }}</p>
+        <p><strong>预约手机号:</strong> {{ reservation.contact_phone }}</p>
+        <p><strong>备注:</strong> {{ reservation.note }}</p>
+        <p><strong>支付时间:</strong> {{ reservation.created_at }}</p>
+    </div>
+{% endfor %}
+
+<!-- 已拒绝预约 -->
+<h3>已拒绝预约</h3>
+{% for reservation in rejected_reservations %}
+    <div class="reservation-card">
+        <p><strong>景区:</strong> {{ reservation.reservation_name }}</p>
+        <p><strong>名字:</strong> {{ reservation.contact_name }}</p>
+        <p><strong>预约手机号:</strong> {{ reservation.contact_phone }}</p>
+        <p><strong>备注:</strong> {{ reservation.note }}</p>
+        <p><strong>支付时间:</strong> {{ reservation.created_at }}</p>
+    </div>
+{% endfor %}
+
+{% endblock %}

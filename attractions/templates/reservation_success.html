@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="reservation-success">
+    <h2>预约成功！</h2>
+    <p>您已成功预定景点 <strong>{{ reservation.attraction.name }}</strong>。</p>
+    <p>预约日期：{{ reservation.date }} | 预约时间：{{ reservation.time }}</p>
+    <p>联系人：{{ reservation.contact_name }} | 电话：{{ reservation.contact_phone }}</p>
+    <p>预定人数：{{ reservation.num_people }} | 总金额：¥{{ reservation.total_price }}</p>
+    <p>备注：{{ reservation.note }}</p>
+    <a href="/">返回首页</a>
+    <p>请返回首页后到我的预约进行支付</p>
+</div>
+{% endblock %}

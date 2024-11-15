@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}景点选择与预定{% endblock %}
+{% block content %}
+
+    <div id="main-container">
+        <!-- 最左侧：省份选择 -->
+        <div id="provinces-list" class="sidebar">
+            <h2>选择省份</h2>
+            <ul class="province-list">
+                {% for province in provinces %}
+                    <li class="province-item" data-province="{{ province.name }}">
+                        {{ province.zh_name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- 中间：省份对应的景点 -->
+        <div id="attractions-list" class="content">
+            <h2>景点列表</h2>
+            <div class="attractions-container">
+                <!-- 选择省份后动态展示景点 -->
+                <div id="attractions-placeholder">
+                    <p>请选择一个省份以查看其景点。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最右侧：景点介绍与预定申请表单 -->
+        <div id="attraction-detail" class="sidebar">
+            <h2>景点详情</h2>
+            <div id="attraction-info">
+                <p>选择一个景点查看其详细信息。</p>
+            </div>
+                <div id="reservation-form" style="display: flex;">
+                <!-- 预定表单，默认隐藏，景点选择后显示 -->
+                <button id="reservation-button" onclick="redirectToReservationPage()">前往提交申请</button>
+                <input type="hidden" id="attraction-id" value="{{ selected_attraction}}">
+                </div>
+                <!-- 提交评论表单 -->
+                <div id="review-form">
+                    <h4>添加评论</h4>
+                    <form id="comment-form">
+                        {% csrf_token %}
+                        <label for="rating">评分 (1-5):</label>
+                        <input type="number" id="rating" name="rating" min="1" max="5" required>
+                        <label for="comment">评论:</label>
+                        <textarea id="comment" name="comment" rows="3" required></textarea>
+                        <button type="submit">提交评论</button>
+                    </form>
+                </div>
+                <!-- 评论区 -->
+                <div id="reviews-section">
+                    <h3>评论区</h3>
+                    <div id="reviews-list">
+                        <!-- 初始状态可显示“暂无评论”-->
+                        <p id="no-reviews-message">暂无评论</p>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <!-- 引用 JavaScript 文件 -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/view_attractions.css' %}">
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}我的预约{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/my_reservations.css' %}">
+
+<div class="container">
+    <h1>我的预约</h1>
+
+    <!-- 一键付款按钮，未支付时显示 -->
+    {% if unpaid_reservations %}
+    <button class="pay-all-btn" onclick="location.href='{% url 'pay_all_reservations' %}'">一键付款</button>
+    {% endif %}
+
+    <!-- 未支付预约 -->
+    <div class="reservations-section">
+        <button class="toggle-btn" onclick="toggleVisibility('unpaid-reservations')">未支付预约</button>
+        <div id="unpaid-reservations" class="reservations-list">
+            {% for reservation in unpaid_reservations %}
+            <div class="reservation-card">
+                <!-- 景点图片 -->
+                <img src="{{ reservation.image }}" alt="{{ reservation.name }}" class="reservation-image">
+                <div class="reservation-info">
+                    <p><strong>景点:</strong> {{ reservation.name }}</p>
+                    <p><strong>日期:</strong> {{ reservation.date }}</p>
+                    <p><strong>人数:</strong> {{ reservation.num_people }}</p>
+                    <p><strong>总价:</strong> ¥{{ reservation.total_price }}</p>
+                    <p><strong>支付状态:</strong> 未支付</p>
+                    <button class="pay-btn" onclick="location.href='{% url 'pay_reservation' reservation.id %}'">付款</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 已支付预约 -->
+    <div class="reservations-section">
+        <button class="toggle-btn" onclick="toggleVisibility('paid-reservations')">已支付预约</button>
+        <p>(红色:拒绝，绿色:通过，白色:审核中)</p>
+        <div id="paid-reservations" class="reservations-list">
+            {% for reservation in paid_reservations %}
+            <div class="reservation-card {% if reservation.status  == 'approve' %}approved{% elif reservation.status == 'reject' %}unapproved{% endif %}">
+                <!-- 景点图片 -->
+                <img src="{{ reservation.image }}" alt="{{ reservation.name }}" class="reservation-image">
+                <div class="reservation-info">
+                    <p><strong>景点:</strong> {{ reservation.name }}</p>
+                    <p><strong>日期:</strong> {{ reservation.date }}</p>
+                    <p><strong>人数:</strong> {{ reservation.num_people }}</p>
+                    <p><strong>总价:</strong> ¥{{ reservation.total_price }}</p>
+                    <p><strong>支付状态:</strong> 已支付</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+<script>
+    // 切换折叠显示
+    function toggleVisibility(id) {
+        var element = document.getElementById(id);
+        if (element.style.display === "none") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+</script>

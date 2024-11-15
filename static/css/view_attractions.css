@@ -1,0 +1,98 @@
+.province-list {
+    list-style-type: none;  /* 去除默认列表样式 */
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);  /* 每行 7 列 */
+    gap: 10px;  /* 列间距 */
+}
+
+.province-item {
+    padding: 10px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.province-item:hover {
+    background-color: #dcdcdc;
+}
+
+
+#review-form {
+    margin-top: 20px;
+}
+
+#review-form textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+#review-form button {
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#review-form button:hover {
+    background-color: #0056b3;
+}
+
+/* 评论区整体样式 */
+#reviews-section {
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+}
+
+#reviews-section h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 单条评论容器样式 */
+.review-container {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.review-container:hover {
+    transform: translateY(-5px);
+}
+
+/* 用户名样式 */
+.review-name {
+    font-weight: bold;
+    color: #0073e6;
+    margin-bottom: 5px;
+}
+
+/* 评分样式 */
+.review-rating {
+    color: #ffcc00;
+    margin-bottom: 5px;
+}
+
+/* 评论日期样式 */
+.review-date {
+    font-size: 0.85em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+/* 评论内容样式 */
+.review-comment {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333;
+}

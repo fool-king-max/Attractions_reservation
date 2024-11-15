@@ -1,0 +1,33 @@
+{% load static %}
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="{% url 'view_attractions' %}">主页</a>
+                <a href="{% url 'signup' %}">注册</a>
+                <a href="{% url 'signin' %}">登录</a>
+                <a href="{% url 'signout' %}">注销</a>
+            </div>
+            <div class="nav-right">
+                {% if user.is_authenticated and user.role == 'attraction_manager' %}
+                    <a href="{% url 'manager_dashboard' %}">景区管理员面板</a>
+                {% endif %}
+                <a href="{% url 'profile' %}">我的信息</a>
+                <a href="{% url 'my_reservations' %}">我的所有预约</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

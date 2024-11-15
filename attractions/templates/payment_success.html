@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}支付成功{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>支付成功！</h2>
+    <p>您的支付已成功，5秒后将自动返回主页。</p>
+    <button onclick="window.location.href='{% url 'my_reservations' %}'">立即返回</button>
+</div>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'my_reservations' %}";
+    }, 5000);
+</script>
+{% endblock %}

@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+    margin: 60px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-card {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    align-items: center;  /* Center content vertically */
+}
+
+.reservation-card:hover {
+    transform: translateY(-5px);
+}
+
+.reservation-card.approved {
+    border-left: 5px solid green;
+}
+
+.reservation-card.unapproved {
+    border-left: 5px solid red;
+}
+
+.reservation-info {
+    flex: 1;
+    margin-right: 20px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.reservation-info p {
+    margin: 5px 0;
+}
+
+button.pay-btn, button.pay-all-btn {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button.pay-btn:hover, button.pay-all-btn:hover {
+    background-color: #45a049;
+}
+
+.reservation-image {
+    width: 150px;  /* 控制图片宽度 */
+    height: 140px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.reservations-section {
+    margin-bottom: 30px;
+}
+
+.toggle-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.toggle-btn:hover {
+    background-color: #45a049;
+}
+
+.reservations-list {
+    display: block;
+}
+
+button.pay-all-btn {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+}
