@@ -7,6 +7,7 @@
     <div id="main-container">
         <!-- 最左侧：省份选择 -->
         <div id="provinces-list" class="sidebar">
+            <h2> .</h2>
             <h2>选择省份</h2>
             <ul class="province-list">
                 {% for province in provinces %}
@@ -48,7 +49,7 @@
                         <input type="number" id="rating" name="rating" min="1" max="5" required>
                         <label for="comment">评论:</label>
                         <textarea id="comment" name="comment" rows="3" required></textarea>
-                        <button type="submit">提交评论</button>
+                        <button type="submit" style="{color: green;}">提交评论</button>
                     </form>
                 </div>
                 <!-- 评论区 -->

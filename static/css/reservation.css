@@ -1,0 +1,86 @@
+
+/* 基础重置 */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* 预约容器样式 */
+.reservation-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* 标题样式 */
+.reservation-container h2 {
+    color: #333;
+    margin-bottom: 40px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* 表单组样式 */
+.form-group {
+    margin-bottom: 25px;
+}
+
+/* 标签样式 */
+.form-group label {
+    display: block;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* 输入框和文本区域样式 */
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* 按钮样式 */
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 备注文本区域样式 */
+textarea {
+    resize: vertical;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .reservation-container {
+        margin: 20px;
+        padding: 20px;
+    }
+}

@@ -5,11 +5,19 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<style>
+    .star-rating {
+        color: gold;
+    }
+    .star-rating::before {
+        content: '★★★★★';
+    }
+    .star-rating::after {
+        content: attr(data-rating) '★' attr(data-max-rating - attr(data-rating)) '☆';
+    }
+</style>
 <div class="profile-container">
     <h1>个人信息</h1>
-
-    <!-- 返回主页按钮 -->
-    <a href="{% url 'view_attractions' %}" class="back-home-btn">返回主页</a>
 
     {% if user_info %}
     <div class="profile-card">
@@ -48,20 +56,20 @@
     {% endif %}
 
     {% if reviews %}
-    <div class="reviews-section">
-        <h2>我的评论</h2>
-        {% for review in reviews %}
-            <div class="review">
-                <p><strong>景点 :</strong> {{ review.attraction_name }}</p>
-                <p><strong>评分:</strong> {{ review.rating }}</p>
-                <p><strong>评论内容:</strong> {{ review.comment }}</p>
-                <p><strong>评论日期:</strong> {{ review.created_at }}</p>
-            </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <p>您还没有发表任何评论。</p>
-    {% endif %}
+<div class="reviews-section">
+    <h2>我的评论</h2>
+    {% for review in reviews %}
+        <div class="review">
+            <p><span class="attraction-name">{{ review.attraction_name }}</span></p>
+            <p><span class="rating">Rating: {{ review.rating }}</span></p>
+            <p><span class="comment">{{ review.comment }}</span></p>
+            <p><span class="date">Date: {{ review.created_at }}</span></p>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>您还没有发表任何评论。</p>
+{% endif %}
 </div>
 <script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

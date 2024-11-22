@@ -1,0 +1,162 @@
+
+/* 基础重置 */
+body, h1, h2, h3, p, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/* 标题样式 */
+h2 {
+    color: #5C6BC0;
+    font-size: 36px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+}
+
+h2:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #5C6BC0;
+    margin: 10px auto 0;
+}
+
+/* 内容区域 */
+#content {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+#content:hover {
+    transform: translateY(-5px);
+}
+
+
+/* 设置表格的整体宽度和边框 */
+table {
+    width: 100%;
+    border-collapse: collapse; /* 去掉表格单元格之间的间隔 */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd; /* 设置表格边框 */
+}
+
+/* 为每列设置固定宽度 */
+th:nth-child(1), td:nth-child(1) {
+    width: 20%; /* 景区列宽度 */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 20%; /* 名字列宽度 */
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 20%; /* 预约手机号列宽度 */
+}
+
+th:nth-child(4), td:nth-child(4) {
+    width: 20%; /* 预定时间列宽度 */
+}
+
+th:nth-child(5), td:nth-child(5) {
+    width: 20%; /* 备注列宽度 */
+}
+
+
+
+/* 按钮样式 */
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-approve, .btn-reject {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-reject {
+    background-color: #f44336;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    th, td {
+        padding: 8px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+}
+.note-container {
+    position: relative;
+}
+
+.toggle-note-btn {
+    margin-top: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.toggle-note-btn:hover {
+    background-color: #0056b3;
+}
+
+.short-note {
+    display: block;
+    max-width: 200px; /* 限制显示宽度 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 5px;
+}
+
+.full-note {
+    display: none;
+    max-width: 200px;
+    word-wrap: break-word;
+    margin-top: 5px;
+}

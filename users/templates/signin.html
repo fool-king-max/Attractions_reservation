@@ -1,6 +1,10 @@
+<!-- users/templates/signin.html -->
 {% extends "base.html" %}
 {% load static %}
 {% block title %}登录{% endblock %}
+{% block headjc %}
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
+{% endblock %}
 {% block content %}
     <div class="login-container">
         <h2>用户登录</h2>
@@ -18,27 +22,24 @@
         <form method="POST" action="{% url 'signin' %}">
             {% csrf_token %}
             <div class="form-group">
-                <label for="id_username">用户名：</label>
+                <label for="id_username">用户:</label>
                 <input type="text" name="username" id="id_username" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="id_password">密码：</label>
+                <label for="id_password">密码:</label>
                 <input type="password" name="password" id="id_password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">登录</button>
         </form>
 
-        <div class="register-link">
-            <p>没有账户？<a href="{% url 'signup' %}">注册</a></p>
-        </div>
-    </div>
-    <!-- 管理员登录链接 -->
-    <div class="admin-login-link">
+
+        <!-- 管理员登录链接 -->
+        <div class="admin-login-link">
+               <p>没有账户? <a href="{% url 'signup' %}">注册</a></p>
         <p>管理员登录？<a href="{% url 'manager_login' %}">点击这里</a></p>
-        <p>总管理员登录<a href="/admin/">点击这里</a></p>
-
+        <p>总管理员登录?<a href="/admin/"> 点击这里</a></p>
 
     </div>
-    <script src="{% static 'js/register.js' %}"></script>
-{% endblock %}
 
+    </div>
+{% endblock %}

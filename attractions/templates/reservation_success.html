@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/reservation_success.css' %}">
 <div class="reservation-success">
     <h2>预约成功！</h2>
     <p>您已成功预定景点 <strong>{{ reservation.attraction.name }}</strong>。</p>

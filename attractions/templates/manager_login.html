@@ -1,6 +1,11 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% block title %}登录{% endblock %}
+{% block headjc %}
+<link rel="stylesheet" href="{% static 'css/manager_login.css' %}">
+{% endblock %}
 {% block content %}
+  <h2>-</h2>
   <h2>景区管理员登录</h2>
   <form method="POST">
       {% csrf_token %}

@@ -11,6 +11,10 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.utils import timezone
 import time
+from collections import defaultdict
+
+
+
 # 主页面展示
 @login_required
 def view_attractions(request):
@@ -421,6 +425,8 @@ def manager_dashboard(request):
     upcoming_reservations = []
     next_month_count = 0
     daily_reservations = {}  # 用于存储每天的预约人数
+    daily_reservations = defaultdict(int)  # 默认值为 0 的字典
+    print(managed_attractions)
     # reservations_dict = {}
     for attraction in managed_attractions:
         with connection.cursor() as cursor:
@@ -434,7 +440,7 @@ def manager_dashboard(request):
 
             # 获取近一个月每天的预约人数
             cursor.execute("""
-                            SELECT date, COUNT(*)
+                            SELECT date, COUNT(*) count
                             FROM attractions_reservation
                             WHERE attraction_id = %s AND is_paid = 1 AND date >= CURRENT_DATE AND date < date(CURRENT_DATE, '+1 month')
                             GROUP BY date
@@ -444,11 +450,12 @@ def manager_dashboard(request):
             daily_reservations_data = cursor.fetchall()
             for date, count in daily_reservations_data:
                 # 将每天的预约人数添加到字典中
-                daily_reservations[str(date)] = count
+                daily_reservations[str(date)] += int(count)
+                print(type(daily_reservations[str(date)]))
 
             # 获取已支付、待管理员同意或拒绝的预约
             cursor.execute("""
-                SELECT r.id, r.user_id, r.contact_name, r.contact_phone, r.note, r.created_at, r.status, a.name AS attraction_name
+                SELECT r.id, r.user_id, r.contact_name, r.contact_phone, r.note, r.date, r.status, a.name AS attraction_name
                 FROM attractions_reservation AS r
                 JOIN attractions_attraction AS a ON r.attraction_id = a.id
                 WHERE r.attraction_id = %s AND r.is_paid = 1 AND r.date >= CURRENT_DATE
@@ -470,7 +477,7 @@ def manager_dashboard(request):
                     'contact_name': reservation[2],
                     'contact_phone': reservation[3],
                     'note': reservation[4],
-                    'created_at': reservation[5],
+                    'date': reservation[5],
                     'reservation_name': reservation[7]
                 }
                 #print(type(reservation[6]),reservation[6],"sdgfhghkgfdsdbdfgfng")
