@@ -1,14 +1,29 @@
+
+
+
+
 {% extends "base.html" %}
 {% load static %}
 {% block headjc %}
 <link rel="stylesheet" href="{% static 'css/manager_dashboard.css' %}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{% static 'js/manager_dashboard.js' %}"></script>
+<style>
+/* 添加CSS样式来缩小按钮并放在同一行 */
+.action-buttons {
+    display: flex;
+    gap: 5px; /* 控制按钮之间的间距 */
+}
+
+.action-buttons button {
+    padding: 5px 10px; /* 缩小按钮的内边距 */
+    font-size: 14px; /* 缩小按钮的字体大小 */
+}
+</style>
 {% endblock %}
 {% block title %}景区管理{% endblock %}
 {% block content %}
 
-<h2> .</h2>
 <h2>管理景区预约</h2>
 
 <!-- 未来一个月预约统计 -->
@@ -24,40 +39,45 @@
 
 <!-- 待处理预约 -->
 <h3>待处理预约</h3>
-<table>
-    <thead class="header-row">
-        <tr>
-            <th>景区</th>
-            <th>名字</th>
-            <th>预约手机号</th>
-            <th>预定时间</th>
-            <th>备注</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        {% for reservation in upcoming_reservations %}
-        <tr>
-            <td>{{ reservation.reservation_name }}</td>
-            <td>{{ reservation.contact_name }}</td>
-            <td>{{ reservation.contact_phone }}</td>
-            <td>{{ reservation.date }}</td>
-            <td>
-                <div class="note-container">
-                    <span class="short-note">{{ reservation.note|truncatechars:20 }}</span>
-                    <span class="full-note" style="display: none;">{{ reservation.note }}</span>
-                    <button class="toggle-note-btn" onclick="toggleNote(this)">展开</button>
-                </div>
-            </td>
-
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<!-- 批量操作按钮 -->
 <form method="post" action="{% url 'batch_update_reservations' %}">
     {% csrf_token %}
+    <table>
+        <thead class="header-row">
+            <tr>
+                <th>景区</th>
+                <th>名字</th>
+                <th>预约手机号</th>
+                <th>预定时间</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in upcoming_reservations %}
+            <tr>
+                <td>{{ reservation.reservation_name }}</td>
+                <td>{{ reservation.contact_name }}</td>
+                <td>{{ reservation.contact_phone }}</td>
+                <td>{{ reservation.date }}</td>
+                <td>
+                    <div class="note-container">
+                        <span class="short-note">{{ reservation.note|truncatechars:20 }}</span>
+                        <span class="full-note" style="display: none;">{{ reservation.note }}</span>
+                        <button class="toggle-note-btn" onclick="toggleNote(this)">展开</button>
+                    </div>
+                </td>
+                <td>
+                    <!-- 单个预约的同意和拒绝按钮 -->
+                    <div class="action-buttons">
+                        <button type="submit" name="action" value="approve_{{ reservation.reservation_id }}" class="btn btn-approve">同意</button>
+                        <button type="submit" name="action" value="reject_{{ reservation.reservation_id }}" class="btn btn-reject">拒绝</button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- 批量操作按钮 -->
     <button type="submit" name="action" value="approve" class="btn btn-approve">批量同意</button>
     <button type="submit" name="action" value="reject" class="btn btn-reject">批量拒绝</button>
 </form>
@@ -72,7 +92,6 @@
             <th>预约手机号</th>
             <th>预定时间</th>
             <th>备注</th>
-
         </tr>
     </thead>
     <tbody>
@@ -89,7 +108,6 @@
                     <button class="toggle-note-btn" onclick="toggleNote(this)">展开</button>
                 </div>
             </td>
-
         </tr>
         {% endfor %}
     </tbody>
@@ -105,7 +123,6 @@
             <th>预约手机号</th>
             <th>预定时间</th>
             <th>备注</th>
-
         </tr>
     </thead>
     <tbody>
@@ -122,12 +139,12 @@
                     <button class="toggle-note-btn" onclick="toggleNote(this)">展开</button>
                 </div>
             </td>
-
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
 {% endblock %}
+
 
 
